@@ -2,10 +2,12 @@
 %%% Authors:
 %%%   Martin Henz (henz@iscs.nus.edu.sg)
 %%%   Christian Schulte <schulte@ps.uni-sb.de>
+%%%   Andrew Pennebaker <andrew.pennebaker@gmail.com>
 %%%
 %%% Copyright:
 %%%   Martin Henz, 1997
 %%%   Christian Schulte, 1997
+%%%   Andrew Pennebaker, 2013
 %%%
 %%% Last change:
 %%%   $Date$ by $Author$
@@ -77,6 +79,12 @@ fun {Map Xs P}
    case Xs of nil then nil
    [] X|Xr then {P X}|{Map Xr P}
    end
+end
+
+fun {ParMap Xs F}
+  case Xs of nil then nil
+  [] X|Xr then thread {F X} end |{ParMap Xr F}
+  end
 end
 
 fun {FoldL Xs P Z}
